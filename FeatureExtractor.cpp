@@ -19,7 +19,7 @@ caffe::MemoryDataLayer<float>* memory_layer;
 
 FeatureExtractor::FeatureExtractor(){
 	ModelFileName = "Resources\\face_deploy.prototxt";
-	TrainedFileName = "Resources\\umd1face.caffemodel";
+	TrainedFileName = "Resources\\umd1face1.caffemodel";
 
 	net_ = new caffe::Net<float>(ModelFileName, caffe::TEST);
 	net_->CopyTrainedLayersFrom(TrainedFileName);
