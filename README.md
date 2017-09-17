@@ -1,7 +1,7 @@
 # Face-Detection-Recognition
 An QT widget that could learn features from camera/image, then recognize them in video/camera/image. 
 
-Environment required:
+Environment requirement:
 QT5
 OpenCV3
 Caffe
