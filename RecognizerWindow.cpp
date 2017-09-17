@@ -1,4 +1,4 @@
-#include "RecognizerWindow.h"
+#include "Headers/RecognizerWindow.h"
 
 RecognizerWindow::RecognizerWindow(QWidget* parent) :QMainWindow(parent){
 	ui.setupUi(this);
@@ -41,7 +41,7 @@ void RecognizerWindow::on_picturebutton_clicked(){
 			Name = distancecalculator_->MostLikeFace(faceprocessor_.faceFeatures[i]);
 			cv::rectangle(Picture, faceprocessor_.multifaceinfo[i].first, cv::Scalar(0, 0, 255), 2);
 			putTextZH(Picture, Name.c_str(), cv::Point(faceprocessor_.multifaceinfo[i].first.x, faceprocessor_.multifaceinfo[i].first.y + faceprocessor_.multifaceinfo[i].first.height - faceprocessor_.multifaceinfo[i].first.height / 6),
-				cv::Scalar(0, 255, 0), faceprocessor_.multifaceinfo[i].first.height / 6, "ΊΪΜε");
+				cv::Scalar(0, 255, 0), faceprocessor_.multifaceinfo[i].first.height / 6, "ΒΊΓΓΓ¥");
 			//cv::putText(Picture, Name, cv::Point(faceprocessor_.faceLocations[i].x, faceprocessor_.faceLocations[i].y + faceprocessor_.faceLocations[i].height),
 			//	FONT_HERSHEY_COMPLEX, 1.5, cv::Scalar(0, 255, 0), 4);
 		}
@@ -71,7 +71,7 @@ void RecognizerWindow::display_camera(){
 		cv::rectangle(frame, faceLocations, cv::Scalar(0, 0, 255), 2);
 
 		putTextZH(frame, Name.c_str(), cv::Point(faceLocations.x, faceLocations.y + faceLocations.height - faceLocations.height / 6),
-			cv::Scalar(0, 255, 0), faceLocations.height / 6, "ΊΪΜε");
+			cv::Scalar(0, 255, 0), faceLocations.height / 6, "ΒΊΓΓΓ¥");
 
 		/*cv::putText(frame, Name, cv::Point(faceLocations.x, faceLocations.y + faceLocations.height),
 			FONT_HERSHEY_COMPLEX, 1.5, cv::Scalar(0, 255, 0), 4);*/
@@ -108,7 +108,7 @@ void RecognizerWindow::display_video(){
 			Name = distancecalculator_->MostLikeFace(faceimg_->faceFeatures[i]);
 			cv::rectangle(frame, faceLocations, cv::Scalar(0, 0, 255), 2);
 			putTextZH(frame, Name.c_str(), cv::Point(faceLocations.x, faceLocations.y + faceLocations.height - faceLocations.height / 6),
-				cv::Scalar(0, 255, 0), faceLocations.height / 6, "ΊΪΜε");
+				cv::Scalar(0, 255, 0), faceLocations.height / 6, "ΒΊΓΓΓ¥");
 			/*cv::putText(frame, Name, cv::Point(faceLocations.x, faceLocations.y + faceLocations.height),
 				FONT_HERSHEY_COMPLEX, 1.5, cv::Scalar(0, 255, 0), 4);*/
 		}
