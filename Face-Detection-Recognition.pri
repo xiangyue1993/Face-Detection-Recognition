@@ -26,7 +26,7 @@ SOURCES += ./RecognizerWindow.cpp \
     ./Camera.cpp \
     ./LogWindow.cpp \
     ./PutText.cpp
-FORMS += ./LogWindow.ui \
-    ./MainWindow.ui \
-    ./RecognizerWindow.ui
+FORMS += ./GUI/LogWindow.ui \
+    ./GUI/MainWindow.ui \
+    ./GUI/RecognizerWindow.ui
 RESOURCES += test.qrc
