@@ -1,4 +1,4 @@
-#include "LogWindow.h"
+#include "Headers/LogWindow.h"
 #include "qmessagebox.h"
 
 LogWindow::LogWindow(QWidget* parent) :QMainWindow(parent){
