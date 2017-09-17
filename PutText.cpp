@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "putText.h"
+#include "Headers/putText.h"
 
 int max(int a, int b){
 	return a > b ? a : b;
@@ -29,8 +29,8 @@ void putTextZH(cv::Mat &dst, const char* str, cv::Point org, cv::Scalar color, i
 	lf.lfEscapement = 0;
 	lf.lfOrientation = 0;
 	lf.lfWeight = 5;
-	lf.lfItalic = italic;   //Ð±Ìå
-	lf.lfUnderline = underline; //ÏÂ»®Ïß
+	lf.lfItalic = italic;   //æ–œä½“
+	lf.lfUnderline = underline; //ä¸‹åˆ’çº¿
 	lf.lfStrikeOut = 0;
 	lf.lfCharSet = DEFAULT_CHARSET;
 	lf.lfOutPrecision = 0;
@@ -47,8 +47,8 @@ void putTextZH(cv::Mat &dst, const char* str, cv::Point org, cv::Scalar color, i
 	int singleRow = 0;
 	char buf[1 << 12];
 	strcpy_s(buf, str);
-	char *bufT[1 << 12];  // Õâ¸öÓÃÓÚ·Ö¸ô×Ö·û´®ºóÊ£ÓàµÄ×Ö·û£¬¿ÉÄÜ»á³¬³ö¡£
-	//´¦Àí¶àÐÐ
+	char *bufT[1 << 12];  // è¿™ä¸ªç”¨äºŽåˆ†éš”å­—ç¬¦ä¸²åŽå‰©ä½™çš„å­—ç¬¦ï¼Œå¯èƒ½ä¼šè¶…å‡ºã€‚
+	//å¤„ç†å¤šè¡Œ
 	{
 		int nnh = 0;
 		int cw, ch;
