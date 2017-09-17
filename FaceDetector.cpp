@@ -1,4 +1,4 @@
-#include "FaceDetector.h"
+#include "Headers/FaceDetector.h"
 //LibFaceDetection are required, refer to https://github.com/ShiqiYu/libfacedetection
 #include "facedetect-dll.h"
 
