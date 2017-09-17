@@ -39,31 +39,25 @@ std::vector<float> FeatureExtractor::ExtractFeature(cv::Mat& srcImg){
 
 	srcImg.convertTo(srcImg, CV_8U);
 
-	InputImg.push_back(srcImg);
+	InputImg.push_back(srcImg.clone());
 	tempLabel.push_back(0);
 
-	//cv::flip(srcImg, srcImg, 1);
+	cv::flip(srcImg, srcImg, 1);	//flip
 
-	//InputImg.push_back(srcImg);
-	//tempLabel.push_back(0);
+	InputImg.push_back(srcImg.clone());
+	tempLabel.push_back(0);
 
 	memory_layer->AddMatVector(InputImg, tempLabel);
-
 	std::vector<caffe::Blob<float>*> input_vec;
 	net_->Forward(input_vec);
 
 	boost::shared_ptr<caffe::Blob<float>> fc5 = net_->blob_by_name("fc5");
 
-	int iter = 0;
-	while (iter < OUTPUT_VECTOR_SIZE)
-	{
-		features.push_back(fc5->data_at(0, iter++, 0, 0));
+	for (int i = 0; i < 2; i++){//index of image
+		for (int j = 0; j < OUTPUT_VECTOR_SIZE; j++){
+			features.push_back(fc5->data_at(i, j, 0, 0));
+		}
 	}
-
-	//iter = 0;
-	//while (iter < OUTPUT_VECTOR_SIZ){
-	//	features.push_back(fc5->data_at(1, iter++, 0, 0));
-	//}
 	
 	return features;
 }
