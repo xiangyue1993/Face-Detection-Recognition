@@ -1,4 +1,4 @@
-#include "MainWindow.h"
+#include "Headers/MainWindow.h"
 
 MainWindow::MainWindow(QWidget* parents) :QMainWindow(parents){
 	ui.setupUi(this);
