@@ -139,6 +139,8 @@ std::vector<std::vector<float>> FeatureExtractor::ExtractFeature(std::vector<cv:
 			}
 		}
 	}
+	
+	delete args;
 
 	return result;
 }
