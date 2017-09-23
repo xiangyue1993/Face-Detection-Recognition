@@ -4,7 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <strstream>  
+#include <strstream> 
 
 void UnicodeToAnsi(wchar_t* wszString, std::string& Res){
 	int ansiLen = ::WideCharToMultiByte(CP_ACP, NULL, wszString, wcslen(wszString), NULL, 0, NULL, NULL);
@@ -64,18 +64,20 @@ std::string DistanceCalculator::MostLikeFace(std::vector<float> TestFaceFeature)
 	float MaxCosine = 0;;
 
 	for (int i = 0; i < HistoryFaceFeatures.size(); i++){
-		float FeatureLen_1 = 0, FeatureLen_2 = 0, InnerProduct = 0;
-		for (int j = 0; j < HistoryFaceFeatures[i].size(); j++){
-			FeatureLen_1 += (TestFaceFeature[j] * TestFaceFeature[j]);
-			FeatureLen_2 += (HistoryFaceFeatures[i][j] * HistoryFaceFeatures[i][j]);
-			InnerProduct += (TestFaceFeature[j] * HistoryFaceFeatures[i][j]);
-		}
-		float Cosine;
-		Cosine = InnerProduct / (sqrt(FeatureLen_1) * sqrt(FeatureLen_2));
+		for (int k = 0; k < 2; k++){
+			float FeatureLen_1 = 0, FeatureLen_2 = 0, InnerProduct = 0;
+			for (int j = 0; j < HistoryFaceFeatures[i].size() / 2; j++){
+				FeatureLen_1 += (TestFaceFeature[j] * TestFaceFeature[j]);
+				FeatureLen_2 += (HistoryFaceFeatures[i][j + k * HistoryFaceFeatures[i].size() / 2] * HistoryFaceFeatures[i][j + k * HistoryFaceFeatures[i].size() / 2]);
+				InnerProduct += (TestFaceFeature[j] * HistoryFaceFeatures[i][j + k * HistoryFaceFeatures[i].size() / 2]);
+			}
+			float Cosine;
+			Cosine = InnerProduct / (sqrt(FeatureLen_1) * sqrt(FeatureLen_2));
 
-		if (Cosine>MaxCosine){
-			MaxCosine = Cosine;
-			ResIndex = i;
+			if (Cosine>MaxCosine){
+				MaxCosine = Cosine;
+				ResIndex = i;
+			}
 		}
 	}
 
@@ -87,7 +89,6 @@ std::string DistanceCalculator::MostLikeFace(std::vector<float> TestFaceFeature)
 
 		RecognizationResult = HistoryFaceLabels[ResIndex] + " " + str_similarity + "%";
 	}
-
 
 	return RecognizationResult;
 }
