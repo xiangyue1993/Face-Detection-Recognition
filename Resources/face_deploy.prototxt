@@ -5,7 +5,7 @@ layer {
   top: "pair_data"
   top: "label"
   memory_data_param {
-    batch_size: 1
+    batch_size: 2
     channels: 3
     height: 112
     width: 96
