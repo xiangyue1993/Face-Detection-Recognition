@@ -6,6 +6,7 @@
 #include "FeatureExtractor.h"
 
 #define NO_FEATURE_EXTRACT 1
+#define USE_MULTITHREAD
 
 class FaceImg
 {
