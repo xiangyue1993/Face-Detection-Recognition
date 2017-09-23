@@ -59,6 +59,7 @@ void FaceImg::FaceProcess(cv::Mat& inputImage, int whether_extract_feature){
 	multifaceinfo = facedetector_.FaceDetection(srcImg);
 
 	if (whether_extract_feature == 0){
+#ifndef USE_MULTITHREAD
 		for (int i = 0; i < multifaceinfo.size(); i++){
 			cv::Mat warp_mat, cropImg;
 
@@ -73,6 +74,24 @@ void FaceImg::FaceProcess(cv::Mat& inputImage, int whether_extract_feature){
 
 			faceFeatures.push_back(featureextractor_.ExtractFeature(cropImg));
 		}
+#else
+		std::vector<cv::Mat> faces;
+		for (int i = 0; i < multifaceinfo.size(); i++){
+			cv::Mat warp_mat, cropImg;
+
+			warp_mat = cv::estimateRigidTransform(multifaceinfo[i].second, coord5points, false);
+			if (warp_mat.empty()){
+				warp_mat = getsrc_roi(multifaceinfo[i].second, coord5points);
+			}
+			warp_mat.convertTo(warp_mat, CV_32FC1);
+			cropImg = cv::Mat::zeros(INPUTIMAGE_HEIGHT, INPUTIMAGE_WIDTH, srcImg.type());
+			warpAffine(srcImg, cropImg, warp_mat, cropImg.size());
+			cropImg.convertTo(cropImg, CV_32FC1);
+
+			faces.push_back(cropImg.clone());
+		}
+		faceFeatures = featureextractor_.ExtractFeature(faces);
+#endif
 	}
 }
 
